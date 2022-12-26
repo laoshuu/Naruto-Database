@@ -42,20 +42,16 @@ const StyledCard = styled(Card)`
 
 const MainPage = () => {
     const navigate = useNavigate()
-    const { character, jitsu, tail_monster, village, country, fetchData } = useChat()
+    const { character, jitsu, tail_monster, village, country, queryType, queryString, fetchData, setQueryType, setQueryString } = useChat()
 
     const [form] = Form.useForm()
 
-    const [queryType, setQueryType] = useState('character');
+    const [search, setSearch] = useState('')
+
     const QueryChange = (e) => {
         console.log('radio checked', e.target.value);
         setQueryType(e.target.value);
     };
-    const [input, setInput] = useState("")
-    const [search, setSearch] = useState('')
-    useEffect(() => {
-        console.log('hello', search)
-    }, []);
 
     return (
         <CardWrapper>
@@ -69,8 +65,8 @@ const MainPage = () => {
             </Radio.Group>
             <br />
             <Input.Search
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
+                value={queryString}
+                onChange={(e) => setQueryString(e.target.value)}
                 // enterButton=""
                 style={{ width: '80%' }}
                 placeholder="Enter what you want to find..."
@@ -102,17 +98,12 @@ const MainPage = () => {
                                 (search === 'country' ?
                                     (<CountryTable country={country} />) :
                                     (<p style={{ color: '#ccc', textAlign: 'center', height: '100%' }} >Please search what you want to know for NARUTO</p>)
+                                    // Text before search
                                 )
                             )
                         )
                     )
                 }
-
-                {/* <CharacterBox character={character} /> */}
-                {/* <JitsuTable jitsu={jitsu}/> */}
-                {/* <TailMonsterBox tail_monster={tail_monster} /> */}
-                {/* <VillageTable village={village}/> */}
-                {/* <CountryTable country={country}/> */}
             </Card>
         </CardWrapper >
     );
