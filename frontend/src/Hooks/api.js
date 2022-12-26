@@ -8,8 +8,12 @@ const ChatContext = createContext({
     tail_monster: [],
     village: [],
     country: [],
+    queryType: '',
+    queryString: '',
 
-    fetchData: () => { }
+    fetchData: () => { },
+    setQueryType: () => { },
+    setQueryString: () => { }
 })
 
 const ChatProvider = (props) => {
@@ -53,10 +57,17 @@ const ChatProvider = (props) => {
         { name: '風之國', village: ['砂隱村'], man_force: null, description: '風之國是火影忍者世界中疆土最大的國家。該國地處荒漠，乾旱少雨，國民居住在砂子構建的特殊建築物內。風之國人口稀少，且和火之國關係密切。風之國的忍者村是砂隱村，該村以傀儡術聞名火影世界。' }
     ]
 
+    const [queryType, setQueryType] = useState('character');
+    const [queryString, setQueryString] = useState('');
     const fetchData = async () => {
         const {
             data: { msg },
-        } = await axios.get('/api/get-data');
+        } = await axios.get('/api/get-data',{
+            params: {
+                type: queryType,
+                queryString: queryString,
+              },
+        });
         console.log(msg)
     };
 
@@ -95,7 +106,11 @@ const ChatProvider = (props) => {
             tail_monster,
             village,
             country,
+            queryType,
+            queryString,
             fetchData,
+            setQueryType,
+            setQueryString,
         }}
         {...props}
     />
