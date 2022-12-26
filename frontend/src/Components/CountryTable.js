@@ -2,22 +2,6 @@ import React from 'react';
 import { Table, Modal } from 'antd';
 
 const CountryTable = ({ country }) => {
-    // open the modal of man force
-    const openManForce = (name, man_force) => {
-        Modal.info({
-            title: `${name} 擁有的人柱力`,
-            content: (
-                <ul>
-                    {man_force.map((man_force, index) => {
-                        return (
-                            <li>{man_force}</li>
-                        )
-                    })}
-                </ul>
-            ),
-            onOk() { },
-        });
-    };
     // open the modal of jitsu's description
     const openDescription = (name, description) => {
         Modal.info({

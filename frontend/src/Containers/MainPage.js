@@ -51,7 +51,11 @@ const MainPage = () => {
         console.log('radio checked', e.target.value);
         setQueryType(e.target.value);
     };
-    const [test, setTest] = useState("")
+    const [input, setInput] = useState("")
+    const [search, setSearch] = useState('')
+    useEffect(() => {
+        console.log('hello', search)
+    }, []);
 
     return (
         <CardWrapper>
@@ -65,13 +69,14 @@ const MainPage = () => {
             </Radio.Group>
             <br />
             <Input.Search
-                value={test}
-                onChange={(e) => setTest(e.target.value)}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 // enterButton=""
                 style={{ width: '80%' }}
                 placeholder="Enter what you want to find..."
                 onSearch={() => {
                     fetchData()
+                    setSearch(queryType)
                 }}
             ></Input.Search>
             <br />
@@ -86,6 +91,23 @@ const MainPage = () => {
                     overflow: 'auto',
                 }}
             >
+                {search === 'character' ?
+                    (<CharacterBox character={character} />) :
+                    (search === 'jitsu' ?
+                        (<JitsuTable jitsu={jitsu} />) :
+                        (search === 'village' ?
+                            (<VillageTable village={village} />) :
+                            (search === 'tail_monster' ?
+                                (<TailMonsterBox tail_monster={tail_monster} />) :
+                                (search === 'country' ?
+                                    (<CountryTable country={country} />) :
+                                    (<p style={{ color: '#ccc', textAlign: 'center', height: '100%' }} >Please search what you want to know for NARUTO</p>)
+                                )
+                            )
+                        )
+                    )
+                }
+
                 {/* <CharacterBox character={character} /> */}
                 {/* <JitsuTable jitsu={jitsu}/> */}
                 {/* <TailMonsterBox tail_monster={tail_monster} /> */}
