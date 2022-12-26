@@ -44,8 +44,6 @@ const MainPage = () => {
     const navigate = useNavigate()
     const { character, jitsu, tail_monster, village, country, fetchData } = useChat()
 
-    const bodyRef = useRef(null);
-
     const [form] = Form.useForm()
 
     const [queryType, setQueryType] = useState('character');
@@ -91,7 +89,7 @@ const MainPage = () => {
                 {/* <CharacterBox character={character} /> */}
                 {/* <JitsuTable jitsu={jitsu}/> */}
                 {/* <TailMonsterBox tail_monster={tail_monster} /> */}
-                <VillageTable village={village} />
+                {/* <VillageTable village={village}/> */}
                 {/* <CountryTable country={country}/> */}
             </Card>
         </CardWrapper >
