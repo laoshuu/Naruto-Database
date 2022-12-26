@@ -18,30 +18,26 @@
 -- update characters set name = '志村團藏' where name = '志村段藏';
 -- SELECT * FROM characters WHERE name LIKE '%牙%'
 WITH A as (
-    select character_name,
-        GROUP_CONCAT(DISTINCT name SEPARATOR ',') as summon
-    from summon_monsters
-    group by character_name
-),
-B as (
-    select name,
-        GROUP_CONCAT(DISTINCT jitsu SEPARATOR ',') as jitsu
+    select jitsu,
+        GROUP_CONCAT(DISTINCT name SEPARATOR ',') as name
     from who_use_jitsu
-    group by name
-)
-select name,
-    family,
-    gender,
-    grade,
-    village,
-    summon,
-    jitsu
-from (
-        A
-        right outer join characters on A.character_name = characters.name
-    )
-    natural join B
-where name like "%鳴人%" -- SELECT * FROM jitsu WHERE NAME LIKE "%仙花%"
+    group by jitsu
+) -- B as (
+--     select name,
+--         GROUP_CONCAT(DISTINCT jitsu SEPARATOR ',') as jitsu
+--     from who_use_jitsu
+--     group by name
+-- )
+select * -- select name,
+    --     family,
+    --     gender,
+    --     grade,
+    --     village,
+    --     summon,
+    --     jitsu
+from A
+    natural join jitsu -- where name like "%人%" 
+    -- SELECT * FROM jitsu WHERE NAME LIKE "%仙花%"
     -- INSERT INTO jitsu (name, description, rating, class, attribute)
     -- VALUES 
     -- ('封印術．陰封印', '施術者結印後後額頭上出現菱形標記，微調節查克拉，達到瞬間治癒和加強攻擊，提高速度的效果，熟練運用者更可以靠百豪之印內查克拉的低輸出和微調節達到駐顏青春，提高身體機能，使身體機能保持在全盛狀態的效果。', 'S', '醫療忍術', '無')
