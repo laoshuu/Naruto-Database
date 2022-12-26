@@ -39,26 +39,26 @@ const CountryTable = ({ country }) => {
                 </div>
             ),
         },
-        {
-            title: '擁有的人柱力',
-            dataIndex: 'man_force',
-            key: 'man_force',
-            render: (_, record) => (
-                <div>
-                    {record.man_force == null ?
-                        (<p style={{ color: '#ccc', textAlign: 'center' }}> No manforce. </p>) :
-                        (<ul>
-                            {record.man_force.map((item) => {
-                                return (
-                                    <li>{item}</li>
-                                )
-                            })
-                            }
-                        </ul>)
-                    }
-                </div>
-            ),
-        },
+        // {
+        //     title: '擁有的人柱力',
+        //     dataIndex: 'man_force',
+        //     key: 'man_force',
+        //     render: (_, record) => (
+        //         <div>
+        //             {record.man_force == null ?
+        //                 (<p style={{ color: '#ccc', textAlign: 'center' }}> No manforce. </p>) :
+        //                 (<ul>
+        //                     {record.man_force.map((item) => {
+        //                         return (
+        //                             <li>{item}</li>
+        //                         )
+        //                     })
+        //                     }
+        //                 </ul>)
+        //             }
+        //         </div>
+        //     ),
+        // },
         {
             title: '說明',
             dataIndex: 'description',

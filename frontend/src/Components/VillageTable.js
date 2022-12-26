@@ -55,6 +55,14 @@ const VillageTable = ({ village }) => {
             title: '忍村所在國家',
             dataIndex: 'country',
             key: 'country',
+            render: (_, record) => (
+                <div>
+                    {record.country == null ?
+                        (<p style={{ color: '#ccc', textAlign: 'start' }}> Unknown Country </p>) :
+                        (<p> {record.country} </p>)
+                    }
+                </div>
+            ),
         },
         {
             title: '忍村居民',
