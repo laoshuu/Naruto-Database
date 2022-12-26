@@ -3,71 +3,71 @@ import { db } from './mysql'
 const router = express.Router()
 
 router.get('/get-data', (req, res) => {
-    // query_type = req.params.type
-    // switch (query_type) {
-    //     case 'character':
-    //         break;
-    //     case 'jitsu':
-    //         break;
-    //     case 'village':
-    //         break;
-    //     case 'tail_monster':
-    //         break;
-    //     case 'country':
-    //         break;
-    //     default:
-    //         break;
-    // }
-
-    //case 1
-    // db.query("WITH A as (select character_name,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as summon from summon_monsters group by character_name),B as (select name,GROUP_CONCAT(DISTINCT jitsu SEPARATOR ',') as jitsu from who_use_jitsu group by name)select name,family,gender,grade,village,summon,jitsu from (A right outer join characters on A.character_name = characters.name) natural join B where name like '%人%'", (err, rows, fields) => {
-    //     const ret = rows.map((item) => {
-    //         console.log(item)
-    //         let summon
-    //         if (!item.summon)
-    //             summon = item.summon
-    //         else summon = item.summon.split(",");
-    //         let jitsu
-    //         if (!item.jitsu)
-    //             jitsu = item.jitsu
-    //         else jitsu = item.jitsu.split(",");
-    //         return (
-    //             {
-    //                 name: item.name,
-    //                 family: item.family,
-    //                 gender: item.gender,
-    //                 grade: item.grade,
-    //                 village: item.village,
-    //                 summon: summon,
-    //                 jitsu: jitsu
-    //             }
-    //         )
-    //     });
-    //     // console.log(ret)
-    //     res.send({ msg: ret })
-    // })
+    const query_type = req.query.type
+    switch (query_type) {
+        case 'character':
+            db.query(`WITH A as (select character_name,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as summon from summon_monsters group by character_name),B as (select name,GROUP_CONCAT(DISTINCT jitsu SEPARATOR ',') as jitsu from who_use_jitsu group by name)select name,family,gender,grade,village,summon,jitsu from (A right outer join characters on A.character_name = characters.name) natural join B where name like '%${req.query.queryString}%'`, (err, rows, fields) => {
+                const ret = rows.map((item) => {
+                    console.log(item)
+                    let summon
+                    if (!item.summon)
+                        summon = item.summon
+                    else summon = item.summon.split(",");
+                    let jitsu
+                    if (!item.jitsu)
+                        jitsu = item.jitsu
+                    else jitsu = item.jitsu.split(",");
+                    return (
+                        {
+                            name: item.name,
+                            family: item.family,
+                            gender: item.gender,
+                            grade: item.grade,
+                            village: item.village,
+                            summon: summon,
+                            jitsu: jitsu
+                        }
+                    )
+                });
+                // console.log(ret)
+                res.send({ msg: ret })
+            })
+            break;
+        case 'jitsu':
+            db.query(`WITH A as (select jitsu,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as name from who_use_jitsu group by jitsu)select jitsu,rating,class,attribute,description,A.name as characters from A join jitsu on A.jitsu = jitsu.name where jitsu like '%${req.query.queryString}%'`, (err, rows, field) => {
+                const ret = rows.map((item) => {
+                    console.log(item)
+                    let characters
+                    if (!item.characters)
+                        characters = item.characters
+                    else characters = item.characters.split(",");
+                    return (
+                        {
+                            name: item.jitsu,
+                            rating: item.rating,
+                            class: item.class,
+                            attribute: item.attribute,
+                            character: characters,
+                            description: item.description
+                        }
+                    )
+                });
+                // console.log(ret)
+                res.send({ msg: ret })
+            })
+            break;
+        case 'village':
+            break;
+        case 'tail_monster':
+            break;
+        case 'country':
+            break;
+        default:
+            break;
+    }
 
     // case 2
-    // db.query("WITH A as (select jitsu,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as name from who_use_jitsu group by jitsu)select jitsu,rating,class,attribute,A.name as characters from A join jitsu on A.jitsu = jitsu.name where jitsu like '%地爆天星%'", (err, rows, field) => {
-    //     const ret = rows.map((item) => {
-    //         console.log(item)
-    //         let characters
-    //         if (!item.characters)
-    //             characters = item.characters
-    //         else characters = item.characters.split(",");
-    //         return (
-    //             {
-    //                 jitsu: item.jitsu,
-    //                 rating: item.rating,
-    //                 class: item.class,
-    //                 attribute: item.attribute,
-    //                 characters: characters,
-    //             }
-    //         )
-    //     });
-    //     // console.log(ret)
-    //     res.send({ msg: ret })
-    // })
+
 
 })
 

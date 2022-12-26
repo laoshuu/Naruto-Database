@@ -42,7 +42,7 @@ const StyledCard = styled(Card)`
 
 const MainPage = () => {
     const navigate = useNavigate()
-    const { character, jitsu, tail_monster, village, country, queryType, queryString, fetchData, setQueryType, setQueryString } = useChat()
+    const { character, jitsu, tail_monster, village, country, queryType, queryString, result, fetchData, setQueryType, setQueryString } = useChat()
 
     const [form] = Form.useForm()
 
@@ -88,9 +88,9 @@ const MainPage = () => {
                 }}
             >
                 {search === 'character' ?
-                    (<CharacterBox character={character} />) :
+                    (<CharacterBox character={result} />) :
                     (search === 'jitsu' ?
-                        (<JitsuTable jitsu={jitsu} />) :
+                        (<JitsuTable jitsu={result} />) :
                         (search === 'village' ?
                             (<VillageTable village={village} />) :
                             (search === 'tail_monster' ?
