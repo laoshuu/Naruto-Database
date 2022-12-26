@@ -15,13 +15,21 @@ import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import CompoundedSpace from 'antd/es/space';
 
+// import query result 
+import CharacterBox from '../Components/CharacterBox';
+import JitsuTable from '../Components/JitsuTable';
+import TailMonsterBox from '../Components/TailMonsterBox';
+import VillageTable from '../Components/VillageTable';
+import CountryTable from '../Components/CountryTable';
+
 const { Title, Paragraph, Text, Link } = Typography;
 
 const CardWrapper = styled.div`
     display: flex;
     overflow: auto;
     flex-direction: column;
-    width: 100%;
+    width: 160%;
+    height: 100%
     margin-bottom: 100px;
     margin-top: 10px;
     align-items: center;
@@ -32,53 +40,61 @@ const StyledCard = styled(Card)`
     margin: 10px
 `;
 
-const StyledBotton = styled(Button)`
-    width: 40%;
-    height: 5%;
-    margin: 10px
-`;
-
-const StyledMenu = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
 const MainPage = () => {
-
-
-
     const navigate = useNavigate()
-    const { fetchData } = useChat()
+    const { character, jitsu, tail_monster, village, country, fetchData } = useChat()
 
     const bodyRef = useRef(null);
 
     const [form] = Form.useForm()
 
-    // const [current, setCurrent] = useState('main');
-    // const onClick = (e) => {
-    //     console.log('click ', e);
-    //     setCurrent(e.key);
-    // };
+    const [queryType, setQueryType] = useState('character');
+    const QueryChange = (e) => {
+        console.log('radio checked', e.target.value);
+        setQueryType(e.target.value);
+    };
     const [test, setTest] = useState("")
+
     return (
-        <>
-            <Title> All Bets Page </Title>
-            {/* <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} /> */}
-            {/* <StyledMenu> */}
-            {/* </StyledMenu> */}
+        <CardWrapper>
+            <Title> NARUTO DATABASE </Title>
+            <Radio.Group name="radiogroup" onChange={QueryChange} defaultValue={'character'} value={queryType}>
+                <Radio value={'character'}> 搜尋人物 </Radio>
+                <Radio value={'jitsu'}> 搜尋忍術 </Radio>
+                <Radio value={'village'}> 搜尋忍村 </Radio>
+                <Radio value={'tail_monster'}> 搜尋尾獸 </Radio>
+                <Radio value={'country'}> 搜尋國家 </Radio>
+            </Radio.Group>
+            <br />
             <Input.Search
-                // ref={bodyRef}
-                // Save and store the textBody
                 value={test}
                 onChange={(e) => setTest(e.target.value)}
                 // enterButton=""
-                placeholder="Enter your bet money..."
+                style={{ width: '80%' }}
+                placeholder="Enter what you want to find..."
                 onSearch={() => {
                     fetchData()
                 }}
             ></Input.Search>
-
-        </>
+            <br />
+            <Card
+                style={{
+                    width: '100%',
+                    height: '70%',
+                    // display: 'flex',
+                    // flexDirection: 'row',
+                    // flexWrap: 'wrap',
+                    // justifyContent: 'space-evenly',
+                    overflow: 'auto',
+                }}
+            >
+                {/* <CharacterBox character={character} /> */}
+                {/* <JitsuTable jitsu={jitsu}/> */}
+                {/* <TailMonsterBox tail_monster={tail_monster} /> */}
+                <VillageTable village={village} />
+                {/* <CountryTable country={country}/> */}
+            </Card>
+        </CardWrapper >
     );
 }
 
