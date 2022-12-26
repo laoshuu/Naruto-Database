@@ -22,18 +22,18 @@ const ChatProvider = (props) => {
     // 角色： 角色名, 性別, 家族, 等級, 忍村, 組織, 召喚獸, 人柱力, 擁有屬性, 術
     // add 召喚獸(summon)
     const character = [
-        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
-        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
-        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
-        { name: '宇智波佐助', family: '宇智波一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], src: 'https://cdn-origin.cool-style.com.tw/cool/2022/10/1e221f9b9c664fadbd70e6c72c439c8b.jpeg' },
-        { name: '春野櫻', family: null, gender: '女', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], src: 'https://www.newton.com.tw/img/6/396/cGcq5CZjNmZ0IDOlBzMmFDOzYjM2QzM4UTOhFjZ3cjM2Q2N4IGOxEWMwYDOv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' }
+        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], summon: ['s1', 's2'] , src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
+        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], summon: ['s1', 's2'], src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
+        { name: '漩渦鳴人', family: '漩渦一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], summon: ['s1', 's2'], src: 'https://www.newton.com.tw/img/d/216/cGcq5SZhdjZ1kDZxYDMlZDOwIDNjRTY5UDOyYDNykTZwMjZxgzM4IDOwYDMv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' },
+        { name: '宇智波佐助', family: '宇智波一族', gender: '男', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], summon: ['s1', 's2'], src: 'https://cdn-origin.cool-style.com.tw/cool/2022/10/1e221f9b9c664fadbd70e6c72c439c8b.jpeg' },
+        { name: '春野櫻', family: null, gender: '女', grade: '下忍', village: '木葉忍者村', jitsu: ['j1', 'j2', 'j3'], summon: ['s1', 's2'], src: 'https://www.newton.com.tw/img/6/396/cGcq5CZjNmZ0IDOlBzMmFDOzYjM2QzM4UTOhFjZ3cjM2Q2N4IGOxEWMwYDOv0WZ0l2LjlGcvU2apFmYv02bj5SdklWYi5yYyN3Ztl2LvoDc0RHa.jpg' }
     ]
 
     // 忍術： 忍術名, 等級, 術種, 使用者, 說明, 屬性(attribute)
     // add 屬性(attribute)
     const jitsu = [
-        { name: '螺旋丸', rating: 'A', class: '忍術', character: ['漩渦鳴人', '自來也', '波風水門'], description: '第四代火影自創的忍術，先將查克拉集中在手上，這時查克拉要以不規則的方向不停流動，加以壓縮，維持成手掌般大小的球狀，再襲向對方，是參考尾獸玉研發而成。此術無帶有任何查克拉屬性。' },
-        { name: '雷切', rating: 'A', class: '忍術', character: ['宇智波佐助'], description: '卡卡西獨創忍術。由於卡卡西曾以千鳥斬斷過真正的雷電，因此又稱為雷切。' }
+        { name: '螺旋丸', rating: 'A', class: '忍術', attribute: '無', character: ['漩渦鳴人', '自來也', '波風水門'], description: '第四代火影自創的忍術，先將查克拉集中在手上，這時查克拉要以不規則的方向不停流動，加以壓縮，維持成手掌般大小的球狀，再襲向對方，是參考尾獸玉研發而成。此術無帶有任何查克拉屬性。' },
+        { name: '雷切', rating: 'A', class: '忍術', attribute: '雷', character: ['宇智波佐助'], description: '卡卡西獨創忍術。由於卡卡西曾以千鳥斬斷過真正的雷電，因此又稱為雷切。' }
     ]
 
     // 忍村： 忍村名, 國家名, 角色, 擁有人柱力, 說明

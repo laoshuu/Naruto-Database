@@ -23,6 +23,23 @@ const CharacterCard = ({ character }) => {
             onOk() { },
         });
     };
+    // const generateSummon = () => {
+    //     let temp = `${character.summon.map((item, index) => {
+    //         // console.log("index", index)
+    //         if (index === 0) {
+    //             return (item)
+    //         }
+    //         else {
+    //             console.log("hhhh")
+    //             return ("and", item)
+    //         }
+    //     })}`
+    //     console.log(temp)
+    //     return (
+    //         <p> {temp} </p>
+    //     )
+    // }
+
     return (
         <>
             <Card
@@ -48,7 +65,7 @@ const CharacterCard = ({ character }) => {
                             <p> 家族：{character.family} </p>
                             <p> 等級：{character.grade} </p>
                             <p> 忍村：{character.village} </p>
-                            <p> 召喚獸：</p>
+                            <p> 召喚獸：{character.summon}</p>
                         </>
                     }
                 />

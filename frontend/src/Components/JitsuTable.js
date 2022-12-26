@@ -46,6 +46,11 @@ const JitsuTable = ({ jitsu }) => {
             key: 'class',
         },
         {
+            title: '忍術屬性',
+            dataIndex: 'attribute',
+            key: 'attribute',
+        },
+        {
             title: '使用者',
             dataIndex: 'user',
             key: 'user',
