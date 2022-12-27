@@ -92,11 +92,11 @@ const MainPage = () => {
                     (search === 'jitsu' ?
                         (<JitsuTable jitsu={result} />) :
                         (search === 'village' ?
-                            (<VillageTable village={village} />) :
+                            (<VillageTable village={result} />) :
                             (search === 'tail_monster' ?
-                                (<TailMonsterBox tail_monster={tail_monster} />) :
+                                (<TailMonsterBox tail_monster={result} />) :
                                 (search === 'country' ?
-                                    (<CountryTable country={country} />) :
+                                    (<CountryTable country={result} />) :
                                     (<p style={{ color: '#ccc', textAlign: 'center', height: '100%' }} >Please search what you want to know for NARUTO</p>)
                                     // Text before search
                                 )
