@@ -9,10 +9,6 @@ router.get('/get-data', (req, res) => {
             db.query(`WITH A as (select character_name,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as summon from summon_monsters group by character_name),B as (select name,GROUP_CONCAT(DISTINCT jitsu SEPARATOR ',') as jitsu from who_use_jitsu group by name)select name,family,gender,grade,village,summon,jitsu from (A right outer join characters on A.character_name = characters.name) natural join B where name like '%${req.query.queryString}%'`, (err, rows, fields) => {
                 const ret = rows.map((item) => {
                     console.log(item)
-                    let summon
-                    if (!item.summon)
-                        summon = item.summon
-                    else summon = item.summon.split(",");
                     let jitsu
                     if (!item.jitsu)
                         jitsu = item.jitsu
@@ -24,7 +20,7 @@ router.get('/get-data', (req, res) => {
                             gender: item.gender,
                             grade: item.grade,
                             village: item.village,
-                            summon: summon,
+                            summon: item.summon,
                             jitsu: jitsu
                         }
                     )
