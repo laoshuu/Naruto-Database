@@ -57,10 +57,67 @@ router.get('/get-data', (req, res) => {
             })
             break;
         case 'village':
+            db.query(`with A as (SELECT village,GROUP_CONCAT(DISTINCT name SEPARATOR ',') as characters from characters GROUP BY village),B as (SELECT * from characters natural join man_force),C as (select village as name, characters, monster from A natural join B)select name, characters, GROUP_CONCAT(DISTINCT monster SEPARATOR ',') as monsters, country_name, description from C natural join villages group by name having name like "%${req.query.queryString}%"`, (err, rows, field) => {
+                const ret = rows.map((item) => {
+                    console.log(item)
+                    // let characters
+                    // if (!item.characters)
+                    //     characters = item.characters
+                    // else characters = item.characters.split(",");
+                    return (
+                        {
+                            name: item.name,
+                            country: item.country_name,
+                            character: item.characters.split(","),
+                            description: item.description,
+                            man_force: item.monsters.split(",")
+                        }
+                    )
+                });
+                // console.log(ret)
+                res.send({ msg: ret })
+            })
             break;
         case 'tail_monster':
+            db.query(`with C as (SELECT A.name as name, monster, sub_name, description FROM man_force as A join tail_monsters as B on A.monster=B.name)select  GROUP_CONCAT(DISTINCT name SEPARATOR ',') as man_force, monster, sub_name, description from C GROUP BY monster HAVING monster like "%${req.query.queryString}%"`, (err, rows, field) => {
+                const ret = rows.map((item) => {
+                    console.log(item)
+                    // let characters
+                    // if (!item.characters)
+                    //     characters = item.characters
+                    // else characters = item.characters.split(",");
+                    return (
+                        {
+                            name: item.monster,
+                            nickname: item.sub_name,
+                            main_force: item.man_force,
+                            description: item.description,
+                        }
+                    )
+                });
+                // console.log(ret)
+                res.send({ msg: ret })
+            })
             break;
         case 'country':
+            db.query(`with A as ( select country_name as name, GROUP_CONCAT(DISTINCT name SEPARATOR ',') as villages FROM villages GROUP BY country_name) select * from A natural join countries where name like "%${req.query.queryString}%"`, (err, rows, field) => {
+                const ret = rows.map((item) => {
+                    console.log(item)
+                    // let characters
+                    // if (!item.characters)
+                    //     characters = item.characters
+                    // else characters = item.characters.split(",");
+                    return (
+                        {
+                            name: item.name,
+                            village: item.villages.split(","),
+                            description: item.description,
+                        }
+                    )
+                });
+                // console.log(ret)
+                res.send({ msg: ret })
+            })
             break;
         default:
             break;
